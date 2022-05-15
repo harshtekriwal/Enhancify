@@ -6,6 +6,7 @@ from copy import deepcopy
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import imageio
 
 # Class containing the chromosome (individual) structure
 class chromosome(object):
@@ -67,7 +68,7 @@ class chromosome(object):
         acc1 = 0
         countOcc2 = 0
         acc2 = 0
-        for i in xrange(len(noZeroPosHist)):
+        for i in range(len(noZeroPosHist)):
             greyLev = noZeroPosHist[i]
             if greyLev <= opt_T:
                 countOcc1 += hist[greyLev]
@@ -168,7 +169,7 @@ class chromosome(object):
         plt.savefig(f_nameConf)
         plt.close()
 
-        scipy.misc.imsave(f_name, self.__matrix)
+        imageio.imwrite(f_name, self.__matrix)
 
     def saveTermFitness(self, file, mod):
         with open(file, mod) as fo:
@@ -185,7 +186,7 @@ class chromosome(object):
             for i in range(len(noZeroPosHist)-1, -1, -1):
                 idx = self.genes[i].position
                 if idx < minGrayLevel or idx > maxGrayLevel:
-                    print 'idx', idx
+                    print ('idx', idx)
                     exit()
                 ind = noZeroPosHist[i]
                 if idx == oldIdx:
@@ -199,7 +200,7 @@ class chromosome(object):
             for i in range(0, len(noZeroPosHist)):
                 idx = self.genes[i].position
                 if idx < minGrayLevel or idx > maxGrayLevel:
-                    print 'idx', idx
+                    print ('idx', idx)
                     exit()
                 ind = noZeroPosHist[i]
                 if idx == oldIdx:

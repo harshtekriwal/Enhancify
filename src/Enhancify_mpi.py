@@ -2,7 +2,7 @@ import sys, glob, os, time
 import numpy as np
 
 from mpi4py import MPI
-from MedGA_sequential import MedGA
+from Enhancify_sequential import Enhancify
 
 WORKTAG = 0
 DIETAG = 1
@@ -75,9 +75,9 @@ def slave():
 
 			start = time.time()
 
-			# MedGA execution on the input image by using the provided GA settings
-			medga = MedGA(inp[0], inp[1])
-			medga.startGA(inp[2], inp[3], inp[4], inp[5], inp[6], inp[7], inp[8])
+			# Enhancify execution on the input image by using the provided GA settings
+			enhancify = Enhancify(inp[0], inp[1])
+			enhancify.startGA(inp[2], inp[3], inp[4], inp[5], inp[6], inp[7], inp[8])
 
 			end = time.time()
 			elapsed = end-start
@@ -156,7 +156,7 @@ if __name__ == '__main__':
 
 		if verbose and len(toProcess) > 0:
 			sys.stdout.write("******************************************************************************************\n")
-			sys.stdout.write("* Running the MPI version of MedGA\n\n")
+			sys.stdout.write("* Running the MPI version of Enhancify\n\n")
 
 			sys.stdout.write( " * GA settings\n")
 			sys.stdout.write( "   -> Number of chromosome: %d\n"%population)
@@ -191,7 +191,7 @@ if __name__ == '__main__':
 
 				pathsOutput.append(pathOutput)
 
-			sys.stdout.write(" * MedGA is using %d cores\n\n\n" % (size))
+			sys.stdout.write(" * Enhancify is using %d cores\n\n\n" % (size))
 
 		startAll = time.time()
 		times = master(toProcess, pathsOutput, population, generations, selection, cross_rate, mut_rate, elitism, pressure, verbose)

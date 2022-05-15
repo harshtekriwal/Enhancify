@@ -2,6 +2,7 @@ import numpy as np
 import scipy.misc
 import math
 import os
+import imageio
 
 # Class containing image processing functions
 class processing(object):
@@ -9,7 +10,7 @@ class processing(object):
     # Loading the input image characterized an underlying bimodal histogram
     def loadImage(self, target_img_name, pathOut):
     
-        image = scipy.misc.imread(target_img_name)
+        image = imageio.imread(target_img_name)
 
         maxValue = np.max(image)
 
@@ -19,7 +20,7 @@ class processing(object):
 
         posNoZeros = list(np.nonzero(hist)[0])
 
-        scipy.misc.imsave(pathOut + os.sep + 'imageOriginal.png', image)
+        imageio.imwrite(pathOut + os.sep + 'imageOriginal.png', image)
 
         T_k =  self.__optimalThreshold(hist, 0.001, 100)
             
